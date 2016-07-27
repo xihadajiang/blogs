@@ -1,0 +1,203 @@
+
+<div id="vmaig-auth-login">
+    <div class="panel panel-vmaig-auth">
+        <div class="panel-heading">
+            <h3 class="panel-title">数据库操作111</h3>
+        </div>
+        <form id="vmaig-auth-login-form" class="clearfix" method="post" role="form">
+            {% csrf_token %}
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <span>SQL</span>
+                    </div>
+                    <textarea id="vmaig-auth-login-username"  class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <span>RES</span>
+                    </div>
+                    <textarea id="vmaig-auth-login-password"  class="form-control"></textarea>
+                </div>
+            </div>
+            <button id="vmaig-auth-login-button" type="submit" class="btn btn-vmaig-auth pull-left">执行</button>
+            <input  type="reset" class="btn btn-vmaig-auth pull-right">重置</input>
+<! -- 添加捐赠图标 -->
+    <div class ="post-donate">
+      <div id="donate_board" class="donate_bar center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;" title="Donate 打赏">打赏</a>
+        <span class="donate_txt">
+           ↑<br>
+           Enjoy it ? Donate me !  欣赏此文？求鼓励，求支持！
+        </span>
+        <br>
+      </div>  
+  
+    <!-- 支付宝打赏图案 -->
+      <div id="donate_guide" class="donate_bar center hidden">
+          <a href="http://static.ixirong.com/pic/donate/alipay1.webp" title="支付宝打赏" class="fancybox" rel="article0"       style="float:left;margin-left:25%;margin-right:2px;">
+          <img src="http://static.ixirong.com/pic/donate/alipay1.webp" title="支付宝打赏" height="164px" width="164px">
+          </a> 
+      </div>
+
+    <!-- 微信打赏图案 -->
+      <div id="donate_guide" class="donate_bar center hidden">
+          <a href="http://static.ixirong.com/pic/donate/wechat.png" title="支付宝打赏" class="fancybox" rel="article0"  >
+          <img src="http://static.ixirong.com/pic/donate/wechat.png" title="支付宝打赏" height="164px" width="164px">
+          </a> 
+      </div>
+  
+      <script type="text/javascript">
+        document.getElementById('btn_donate').onclick = function(){
+          $('#donate_board').addClass('hidden');
+          $('#donate_guide').removeClass('hidden');
+        }
+      </script>
+    </div>
+<! -- 添加捐赠图标 -->
+
+<% if (True) { %>
+  <!-- css -->
+  <style type="text/css">
+      .center {
+          text-align: center;
+      }
+      .hidden {
+          display: none;
+      }
+    .donate_bar a.btn_donate{
+      display: inline-block;
+      width: 82px;
+      height: 82px;
+      background: url("http://7xsl28.com1.z0.glb.clouddn.com/btn_reward.gif") no-repeat;
+      _background: url("http://7xsl28.com1.z0.glb.clouddn.com/btn_reward.gif") no-repeat;
+
+      <!-- http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif
+           因为本 hexo 生成的博客所用的 theme 的 a:hover 带动画效果，
+         为了在让打赏按钮显示效果正常 而 添加了以下几行 css，
+         嵌入其它博客时不一定要它们。 -->
+      -webkit-transition: background 0s;
+      -moz-transition: background 0s;
+      -o-transition: background 0s;
+      -ms-transition: background 0s;
+      transition: background 0s;
+      <!-- /让打赏按钮的效果显示正常 而 添加的几行 css 到此结束 -->
+    }
+
+    .donate_bar a.btn_donate:hover{ background-position: 0px -82px;}
+    .donate_bar .donate_txt {
+      display: block;
+      color: #9d9d9d;
+      font: 14px/2 "Microsoft Yahei";
+    }
+    .bold{ font-weight: bold; }
+  </style>
+  <!-- /css -->
+
+    <!-- Donate Module -->
+    <div id="donate_module">
+
+  <!-- btn_donate & tips -->
+  <div id="donate_board" class="donate_bar center">
+      <br>
+      ------------------------------------------------------------------------------------------------------------------------------
+      <br>
+    <a id="btn_donate" class="btn_donate" target="_self" href="javascript:;" title="Donate 打赏"></a>
+    <span class="donate_txt">
+      <%= theme.donate.text %>
+    </span>
+      
+    
+  </div>
+  <!-- /btn_donate & tips -->
+
+  <!-- donate guide -->
+    
+  <div id="donate_guide" class="donate_bar center hidden">
+        <br>
+      ------------------------------------------------------------------------------------------------------------------------------
+      <br>
+      <% if(theme.donate.web) { %>
+      <div width="100%" align="center"><div name="dashmain" id="dash-main-id-87895f" class="dash-main-3 87895f-0.99"></div></div>
+    <script type="text/javascript" charset="utf-8" src="http://www.dashangcloud.com/static/ds.js"></script>
+    <% } %>
+
+    <a href="<%= theme.donate.wechat %>" title="用微信扫一扫哦~" class="fancybox" rel="article0">
+      <img src="<%= theme.donate.wechat %>" title="微信打赏 Donate" height="190px" width="auto"/>
+    </a>
+        
+          
+
+    <a href="<%= theme.donate.alipay %>" title="用支付宝扫一扫即可~" class="fancybox" rel="article0">
+      <img src="<%= theme.donate.alipay %>" title="支付宝打赏 Donate" height="190px" width="auto"/>
+    </a>
+
+    <span class="donate_txt">
+      <%= theme.donate.text %>
+    </span>
+
+  </div>
+  <!-- /donate guide -->
+
+  <!-- donate script -->
+  <script type="text/javascript">
+    document.getElementById('btn_donate').onclick = function() {
+      $('#donate_board').addClass('hidden');
+      $('#donate_guide').removeClass('hidden');
+    }
+
+    function donate_on_web(){
+      $('#donate').submit();
+        }
+
+    var original_window_onload = window.onload;
+        window.onload = function () {
+            if (original_window_onload) {
+                original_window_onload();
+            }
+            document.getElementById('donate_board_wdg').className = 'hidden';
+    }
+  </script>
+  <!-- /donate script -->
+</div>
+<!-- /Donate Module -->
+   <% } %>
+
+        </form>
+    </div>
+
+</div>
+
+<script language="javascript" type="text/javascript">
+    $('#vmaig-auth-login-form').submit(function(){
+        $.ajax({
+            type:"POST",
+            url:"/usercontrol/login",
+            data:{"username":$("#vmaig-auth-login-username").val(),"password":$("#vmaig-auth-login-password").val()},
+            beforeSend:function(xhr){
+                xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));  
+            },
+            success:function(data,textStatus){
+                var errors = data["errors"];
+                if(errors.length==0){
+                    location.replace("/"); 
+                }
+                else{
+                    //alert(errors);
+                    var str = ""
+                    for (var key in errors){
+                        str += errors[key]+"\n";
+                    }
+                    alert(str);
+                }
+                
+            },
+            error:function(XMLHttpRequest, textStatus, errorThrown){
+                alert(XMLHttpRequest.responseText);
+            }
+        });
+        return false;
+    }); 
+</script>

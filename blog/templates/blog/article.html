@@ -1,0 +1,118 @@
+{% extends "./blog/base.html" %}
+
+{% block main %}
+
+{% url 'category-detail-view' article.category.name as category_url %}
+<style type="text/css">
+.donate_bar{text-align:center;margin-top:5%}.donate_bar a.btn_donate{display:inline-block;width:82px;height:82px;margin-left:auto;margin-right:auto;background:url(http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif)no-repeat;-webkit-transition:background 0s;-moz-transition:background 0s;-o-transition:background 0s;-ms-transition:background 0s;transition:background 0s}.donate_bar a.btn_donate:hover{background-position:0 -82px}.donate_bar .donate_txt{display:block;color:#9d9d9d;font:14px/2 "Microsoft Yahei"}.bold{font-weight:700}
+</style>
+<div class="row">
+    <div id="vmaig-content" class="col-md-8 col-lg-9">
+        <div id="article-page" class="well">
+            <ol class="breadcrumb">
+                <li><a href="/"><span class="glyphicon glyphicon-home"></span></a></li>
+                <li><a href="{{category_url}}">{{article.category}}</a></li>
+                <li class="hidden-xs"><a><span class="glyphicon glyphicon-calendar"></span> {{article.pub_time|date:"Y-m-d"}}</a></li>
+                <li><a>
+                    <span class="glyphicon glyphicon-eye-open"></span>
+                    {{article.view_times}}
+                </a></li>
+                <li class="pull-right"><a>
+                    <span class="glyphicon glyphicon-user"></span> {{article.author}}
+                </a></li>
+            </ol>
+
+            <div id="article">
+                <div class="article-title">
+                    <h1>{{article.title}}</h1>
+                </div>
+                <div class="article-tags">
+                    {% for tag in article.get_tags%}
+                    <a href="{% url 'tag-detail-view' tag %}">
+                        <span class="label label-vmaig-{{forloop.counter}} btn">{{tag}}</span>
+                    </a>
+                    {% endfor %}
+                </div>
+                <hr/>
+                <div class="article-content">
+                    {% autoescape off%}
+                    {{article.content}}
+                    {% endautoescape %}
+                </div>
+
+                <div class="post-footer">
+                <!-- -- 添加捐赠图标 ---->
+                    <div class="post-donate">
+                      <div id="donate_board" class="donate_bar center">
+                        <a id="btn_donate" class="btn_donate" href="javascript:;" title="Donate 打赏"></a>
+                        <span class="donate_txt">
+                           ↑<br>
+                           
+                            赏杯咖啡，持续写作
+                           
+                        </span>
+                        <br>
+                      </div>
+
+                      <div id="donate_guide" class="donate_bar center hidden">
+                        
+                          <a href="/static/img/zfb.png" title="支付宝打赏" class="fancybox" rel="article0" style="float:left;margin-left:25%;margin-right:2px;">
+                          <img src="/static/img/zfb.png" title="支付宝打赏" height="164px" width="164px">
+                          </a>
+                       <a href="/static/img/wx.png" title="微信打赏" class="fancybox" rel="article0">
+                         <img src="/static/img/wx.png" title="微信打赏" height="164px" width="164px">
+                       </a>
+                      </div>
+                      <script type="text/javascript">
+                        document.getElementById('btn_donate').onclick = function(){
+                          $('#donate_board').addClass('hidden');
+                          $('#donate_guide').removeClass('hidden');
+                        }
+                      </script>
+                    </div>
+                <!-- -- end 添加捐赠图标 ---->
+                </div>
+
+            </div>
+        </div>
+
+        <!--评论框 -->
+        {% include "./vmaig_comments/vmaig_comments.html"%}
+
+    </div>
+
+    <div id="vmaig-side" class="col-md-4 col-lg-3 hidden-xs">
+
+        {% include "./blog/widgets/tags_cloud.html"%}
+        {% include "./blog/widgets/search.html"%}
+        {% include "./blog/widgets/hotest_posts.html"%}
+        {% include "./vmaig_comments/latest_comments.html"%}
+    </div>
+</div>
+{% endblock %}
+
+{% block css%}
+<link type="text/css" rel="stylesheet" href="/static/syntaxhighlighter/styles/shCoreDefault.css"/>
+<style type="text/css">
+    #article {
+        font-size:14px;
+        color:#000;
+    }
+
+    blockquote {
+        font-size:14px;
+    }
+</style>
+{% endblock %}
+
+
+{% block js%}
+<script type="text/javascript" src="/static/syntaxhighlighter/scripts/shCore.js"></script>
+<script type="text/javascript" src="/static/syntaxhighlighter/scripts/shBrushCpp.js"></script>
+<script type="text/javascript" src="/static/syntaxhighlighter/scripts/shBrushJava.js"></script>
+<script type="text/javascript" src="/static/syntaxhighlighter/scripts/shBrushPython.js"></script>
+<script type="text/javascript" src="/static/syntaxhighlighter/scripts/shBrushXml.js"></script>
+<script type="text/javascript" src="/static/syntaxhighlighter/scripts/shBrushPowerShell.js"></script>
+<script type="text/javascript" src="/static/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+{% endblock%}
